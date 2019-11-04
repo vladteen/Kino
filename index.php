@@ -8,12 +8,11 @@ if(mysqli_connect_errno())
 {
 	echo mysqli_connect_error;
 }
-$filmId=rand(1,3);
-$sqlQuery="select * from films where id=".$filmId;
+
+$sqlQuery="select * from films";
 $sqlResult=mysqli_query($link, $sqlQuery);
 $filmRows=mysqli_fetch_all($sqlResult, MYSQLI_ASSOC);
-$filmRow=$filmRows [0];
- 
+//$filmRow=$filmRows [0];
 
 ?>
 
@@ -22,20 +21,33 @@ $filmRow=$filmRows [0];
 
 <head>
 	<meta charset="utf-8">
-	<title>КИНО</title>
+	<title>Главная</title>
 </head>
 
 <body>
-	<h1>
+	<main>
 		<?php
-			echo $filmRow["name"];
+		for ($i = 0; $i < count($filmRows); $i++) {
+			
+//			echo $filmRows[$i]["name"];
 		?>
-	</h1>
-	<h3>
+		<div class="main-film-wrapper">
+			<h3><?php echo $filmRows[$i]["name"];?></h3>
+			<p>
+				<?php echo $filmRows[$i]["description"];?>
+			</p>
+			<div class="main-film-link-wrapper">
+				<form action="film.php" method="post">
+					<input type="hidden" name="filmId" value=<?php echo $filmRows[$i]["id"]; ?>>
+					<input type="submit" value="Подробнее">
+				</form>
+			</div>
+		</div>
+
 		<?php
-			echo $filmRow["description"];
+		}s
 		?>
-	</h3>
+	</main>
 </body>
 
 </html>
