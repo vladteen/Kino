@@ -22,32 +22,47 @@ $filmRows=mysqli_fetch_all($sqlResult, MYSQLI_ASSOC);
 <head>
 	<meta charset="utf-8">
 	<title>Главная</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
-	<main>
-		<?php
+	<div class="container">
+		<div class="logo"><img src="pic/4nppbggouzejh.png" alt="logo"></div>
+		<!--				<div class="logo"><a href="">Kino</a></div>-->
+		<nav>
+			<div class="nav-link"><a class="nav-link" href="index.php">Главная</a></div>
+			<div class="nav-link"><a class="nav-link" href="https://google.com">Goooooogle</a></div>
+			<div class="nav-link"><a class="nav-link" href="index.php">Сайт Костика</a></div>
+		</nav>
+		
+		<main>
+			<article>
+
+				<?php
 		for ($i = 0; $i < count($filmRows); $i++) {
 			
 //			echo $filmRows[$i]["name"];
 		?>
-		<div class="main-film-wrapper">
-			<h3><?php echo $filmRows[$i]["name"];?></h3>
-			<p>
-				<?php echo $filmRows[$i]["description"];?>
-			</p>
-			<div class="main-film-link-wrapper">
-				<form action="film.php" method="post">
-					<input type="hidden" name="filmId" value=<?php echo $filmRows[$i]["id"]; ?>>
-					<input type="submit" value="Подробнее">
-				</form>
-			</div>
-		</div>
+				<div class="main-film-wrapper">
+					<!--					<img src="pic/1%20(1).png" alt="Логотип1">-->
+					<!--					<img src="pic/3little.jpg" alt="Постер1">-->
+					<!--					<img <?php echo $filmRows[$i]["logo"];?>>-->
+					<h3><?php echo $filmRows[$i]["name"];?></h3>
+					<p>
+						<?php echo $filmRows[$i]["description"];?>
+					</p>
+					<div class="main-film-link-wrapper">
+						<a href="<?php echo "film.php?filmId=".$filmRows[$i]["id"] ?>">Подробнее</a>
+					</div>
+				</div>
 
-		<?php
-		}s
+				<?php
+		}
 		?>
-	</main>
+			</article>
+		</main>
+	</div>
 </body>
 
 </html>
